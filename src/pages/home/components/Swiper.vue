@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <swiper :options="swiperOption">
+    <swiper :options="swiperOption" v-if="showSwiper">
       <!-- slides -->
-      <swiper-slide v-for="item of swiperList" :key="item.id">
+      <swiper-slide v-for="item of list" :key="item.id">
         <img
           class="swiper-img"
           :src="item.imgUrl"
@@ -16,22 +16,20 @@
 <script>
 export default {
   name: 'HomeSwiper',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
         loop: true
-      },
-      swiperList: [
-        {
-          id: '11',
-          imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/b5/8bd6da9d794e1902.jpg_750x200_b1a28179.jpg'
-        },
-        {
-          id: '22',
-          imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/dd/466fb314a22bd702.jpg_750x200_25ea4968.jpg'
-        }
-      ]
+      }
+    }
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length
     }
   }
 }
@@ -47,7 +45,7 @@ export default {
     height: 0
     // 图片宽高比始终占据26.67%
     // 或者：width: 26.67vw
-    padding-bottom: 26.67%
+    padding-bottom: 31.25%
     background: #eee
     .swiper-img
       width: 100%
